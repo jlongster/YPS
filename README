@@ -1,5 +1,5 @@
 
-It seems to me that you can implement a much better CPS in javascript using the new `yield` operator... This would also work really well with promises, completely eliminating callback hell in one simple step... If this is true, I think I just found something awesome.
+It seems to me that you can implement a much simpler CPS in javascript using the new `yield` operator... This would also work really well with promises, completely eliminating callback hell in one simple step... It also easily integrates into non-CPS code. If this is true, I think I just found something awesome.
 
 I call this technique "Yield Passing Style", as it abuses `yield` to generate individual frames that are controlled with an explicit stack manager, giving me control over the stack and execution.
 
