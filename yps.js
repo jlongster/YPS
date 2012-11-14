@@ -15,20 +15,7 @@ function yieldN(node) {
     node.update('(yield ' + node.source() + ')');
 }
 
-console.log(falafel(src, function(node) {
-    // if(node.type == 'FunctionExpression') {
-    //     if(node.id) {
-    //         var name = node.id.name;
-    //         var pars = node.params.map(function(p) { return p.source(); });
-
-    //         node.update('var ' + name + ' = ' + 
-    //                     'function(' + pars.join(',') + ')' +
-    //                     node.body.source());
-    //     }
-    //     else {
-    //         yieldN(node);
-    //     }
-    // }
+util.puts(falafel(src, function(node) {
     if(node.type == 'CallExpression') {
         yieldN(node);
     }
