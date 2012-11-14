@@ -4,8 +4,12 @@
   <meta charset="utf-8" />
 </head>
 <body>
-  <script type="text/javascript;version=1.8" src="test2.js"></script>
+  Result: <span id="result"></span>
 
-  Hello
+  <script type="text/javascript;version=1.8" src="test-output.js"></script>
+  <script type="text/javascript" src="machine.js"></script>
+  <script type="text/javascript">
+    document.getElementById('result').innerHTML = run(foo(1000));
+  </script>
 </body>
 </html>
