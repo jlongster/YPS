@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+</head>
+<body>
+  <div>YPS Result: <span id="result"></span> (<span id="time"></span> ms)</div>
+  <div>Regular Result: <span id="result2"></span> (<span id="time2"></span> ms)</div>
+
+  <script type="text/javascript">
+    function regularBar(x) {
+        return regularFoo(x - 1) + 1;
+    }
+
+    function regularFoo(x) {
+        if(x > 0) {
+            return 3 + regularBar(x);
+        }
+        return 0;
+    }
+  </script>
+  <script type="text/javascript;version=1.8" src="test-output.js"></script>
+  <script type="text/javascript" src="machine.js"></script>
+  <script type="text/javascript">
+    function now() {
+      // For some reason perf.now must be called directly, can't assign it
+      // to a var and call later
+      if(window.performance) {
+        return performance.now();
+      }
+      else {
+        return Date.now()
+      }
+    }
+
+    function set(id, val) {
+      document.getElementById(id).innerHTML = val;
+    }
+
+    function runTest(func) {
+        var avg = 0;
+        for(var i=0; i<100; i++) {
+            var start = now();
+            func();
+            var dt = now() - start;
+
+            avg = (avg*i + dt) / (i+1);
+        }
+
+        return avg;
+    }
+
+    var x = 1000;
+
+    set('result', run(foo(x)));
+    var avg = runTest(function() {
+        run(foo(x));
+    });
+
+    set('time', avg);
+
+    set('result2', regularFoo(x));
+    var avg = runTest(function() {
+        regularFoo(x);
+    });
+
+    set('time2', avg);
+
+  </script>
+</body>
+</html>
