@@ -1,33 +1,15 @@
 
-// var esprima = require('esprima');
-
-// // Executes visitor on the object and its children (recursively).
-// function traverse(object, visitor) {
-//     var key, child;
-
-//     visitor.call(null, object);
-//     for (key in object) {
-//         if (object.hasOwnProperty(key)) {
-//             child = object[key];
-//             if (child && typeof child === 'object') {
-//                 traverse(child, visitor);
-//             }
-//         }
-//     }
-// }
-
-// traverse(esprima.parse('Math.sin(42);'), function(node) {
-//     if(node.type == 'Literal') {
-//         console.log(node);
-//     }
-// });
-
-
 var falafel = require('falafel');
 var fs = require('fs');
+var util = require('util');
 
-var src = fs.readFileSync('test.js', 'utf-8');
-//var src = "foo()";
+if(process.argv.length < 3) {
+    util.puts('Usage: node yps <filename>');
+    process.exit(1);
+}
+
+var filename = process.argv[2];
+var src = fs.readFileSync(filename, 'utf-8');
 
 function yieldN(node) {
     node.update('(yield ' + node.source() + ')');
